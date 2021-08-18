@@ -23,17 +23,21 @@ const substitutionModule = (function ()
       return arr.lastIndexOf(char) != index;
     });
 
+    //if true, return false
     if(alphabetCheck) return false;
     
  
     let output = "";
     const realKey = "abcdefghijklmnopqrstuvwxyz";
 
+    //loop through each letter in input
     for (letters in input)
     {
+      //store each letter in char
       const char = input[letters];
-      if(char === " ") output += " ";
       
+      //if char is space, add space to output
+      if(char === " ") output += " ";
       else
       {
         if(encode)
@@ -48,4 +52,9 @@ const substitutionModule = (function ()
         }
       }
     }
-    return
+    return output;
+  }
+  return { substitution, };
+})();
+
+module.exports = { substitution: substitutionModule.substitution };
