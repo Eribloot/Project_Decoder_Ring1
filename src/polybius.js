@@ -17,10 +17,9 @@ const polybiusModule = (function ()
 
     let output = "";
 
-    switch(encode)
-    {
       //if encoding 
-      case true:
+    if (encode)
+      {
         //loop through each letter in the input
         for(values in input)
         {
@@ -49,40 +48,41 @@ const polybiusModule = (function ()
               }
           }
         }
+      }
+
         //if decoding
-      case false:
-        
-        //check if input with and without spaces is even, otherwise return false   
-        const noSpaces = input.replace(/ /g, "")
- 
-        if (input.length % 2 != 0 && noSpaces.length % 2 != 0)
-          return false;
-          
-          //loop through set numbers in input
-        for (numbers in input) 
+      else
         {
-          //create a pair to search for in the 
+          //loop through set numbers in input
+        for(numbers in input) 
+        {
+          let pairs = input.split(' ');
+      // for each element in the pairs, check if it's even, if it isn't return false.
+           for (element in pairs)
+             {
+                if (pairs[element].length % 2 != 0)
+                    return false;
+             }
+
           const pair = `${input[0]}${input[1]}`;
           
-          
           //if the input is a space, add it as is to output, remove it from input, and restart loop
-          if (input[0] === ' ') 
+          if(input[0] === ' ') 
           {
             output += input[0];
             input = input.slice(1);
             continue;
           }
-
           //loop through the table and add the matching letter to output
-          for (num in table) 
+          for(num in table) 
           {
-            if (pair === num) 
-              output += table[num];
+            if(pair === num) 
+                output += table[num];
           }
           input = input.slice(2);
         }
-        
       }
+        
     return output;
   }
   return { polybius, };
